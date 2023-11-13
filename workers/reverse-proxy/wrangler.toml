@@ -1,0 +1,6 @@
+name = "reverse-proxy"
+main = "src/index.ts"
+compatibility_date = "2023-10-30"
+
+[dev]
+port = 1234

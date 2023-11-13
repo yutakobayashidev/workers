@@ -11,6 +11,18 @@ importers:
         specifier: ^3.1.2
         version: 3.1.2
 
+  workers/reverse-proxy:
+    devDependencies:
+      '@cloudflare/workers-types':
+        specifier: ^4.20230419.0
+        version: 4.20230419.0
+      typescript:
+        specifier: ^5.0.4
+        version: 5.0.4
+      wrangler:
+        specifier: ^3.0.0
+        version: 3.1.2
+
 packages:
 
   /@cloudflare/kv-asset-handler@0.2.0:
@@ -63,6 +75,10 @@ packages:
     requiresBuild: true
     dev: true
     optional: true
+
+  /@cloudflare/workers-types@4.20230419.0:
+    resolution: {integrity: sha512-MfNBlHrI/ekRkbLtdAo23D4hkXF+3QD92OCwuXxCUK73HtMHuBqkMp9T/8KFbKNRCnz7PzUderc7Jr5m3eeW3g==}
+    dev: true
 
   /@esbuild-plugins/node-globals-polyfill@0.1.1(esbuild@0.16.3):
     resolution: {integrity: sha512-MR0oAA+mlnJWrt1RQVQ+4VYuRJW/P2YmRTv1AsplObyvuBMnPHiizUF95HHYiSsMGLhyGtWufaq2XQg6+iurBg==}
@@ -949,6 +965,12 @@ packages:
       turbo-linux-arm64: 1.10.9
       turbo-windows-64: 1.10.9
       turbo-windows-arm64: 1.10.9
+    dev: true
+
+  /typescript@5.0.4:
+    resolution: {integrity: sha512-cW9T5W9xY37cc+jfEnaUvX91foxtHkza3Nw3wkoF4sSlKn0MONdkdEndig/qPBWXNkmplh3NzayQzCiHM4/hqw==}
+    engines: {node: '>=12.20'}
+    hasBin: true
     dev: true
 
   /undici-types@5.26.5:
