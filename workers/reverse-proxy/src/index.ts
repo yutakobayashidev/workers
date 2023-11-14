@@ -6,6 +6,19 @@ async function handleRequest(request: Request) {
 	try {
 		const url = new URL(request.url);
 
+		if (url.pathname.startsWith('/redirect/')) {
+			// Extract the target URL from the path
+			let targetUrl = url.pathname.slice(10);
+
+			// Preserve query parameters
+			if (url.search) {
+				targetUrl += url.search;
+			}
+
+			// Redirect to the specified URL
+			return Response.redirect(targetUrl, 302);
+		}
+
 		if (url.pathname === '/') {
 			return new Response(`
         Usage:\n
