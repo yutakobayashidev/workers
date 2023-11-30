@@ -1,0 +1,11 @@
+{
+  "name": "devtools",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "deploy": "make publish"
+  },
+  "devDependencies": {
+    "wrangler": "^3.1.2"
+  }
+}
