@@ -11,3 +11,11 @@ When using this reverse proxy on `api.notion.com`, `Notion-Version` is automatic
 ```
 https://reverse-proxy.yutakobayashi.workers.dev/<url>
 ```
+
+## og-image
+
+Parse `og:image` in `head` from url and return image from url.
+
+```
+https://og-image.yutakobayashi.workers.dev?url=https://etherscan.io
+```

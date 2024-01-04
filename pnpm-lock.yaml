@@ -17,6 +17,18 @@ importers:
         specifier: ^3.1.2
         version: 3.1.2
 
+  workers/og-image:
+    devDependencies:
+      '@cloudflare/workers-types':
+        specifier: ^4.20230419.0
+        version: 4.20230419.0
+      typescript:
+        specifier: ^5.0.4
+        version: 5.0.4
+      wrangler:
+        specifier: ^3.0.0
+        version: 3.1.2
+
   workers/reverse-proxy:
     devDependencies:
       '@cloudflare/workers-types':
