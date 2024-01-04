@@ -17,5 +17,5 @@ https://reverse-proxy.yutakobayashi.workers.dev/<url>
 Parse `og:image` in `head` from url and return image from url.
 
 ```
-https://og-image.yutakobayashi.workers.dev?url=https://etherscan.io
+https://og-image.yutakobayashi.workers.dev?url=<url>
 ```
