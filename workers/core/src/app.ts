@@ -7,6 +7,7 @@ import { createQRCode } from "./libs/qr";
 import { QRschema } from "./schema";
 import { createHiroyukiVoice } from "./libs/hiroyuki";
 import { object, string } from "valibot";
+import { cache } from "hono/cache";
 
 const app = new Hono<HonoConfig>();
 
@@ -20,6 +21,10 @@ app.route("/discord", discordRoutes);
 
 app.get(
   "/hiroyuki",
+  cache({
+    cacheName: "hiroyuki",
+    cacheControl: "max-age=86400",
+  }),
   vValidator(
     "query",
     object({
