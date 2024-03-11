@@ -13,7 +13,7 @@ const app = new Hono<HonoConfig>();
 app.use("*");
 
 app.get("/", async (c) => {
-  c.redirect("https://yutakobayashi.dev");
+  return c.redirect("https://yutakobayashi.dev");
 });
 
 app.route("/discord", discordRoutes);
