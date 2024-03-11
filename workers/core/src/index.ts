@@ -10,6 +10,10 @@ const app = new Hono<HonoConfig>();
 
 app.use("*");
 
+app.get("/", async (c) => {
+  c.redirect("https://yutakobayashi.dev");
+});
+
 app.route("/discord", discordRoutes);
 
 app.get("/qr", vValidator("query", QRschema), (c) => {
@@ -22,6 +26,7 @@ app.get("/qr", vValidator("query", QRschema), (c) => {
 
   return c.body(code);
 });
+
 showRoutes(app);
 
 export default app;
