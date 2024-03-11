@@ -4,12 +4,16 @@
     "deploy": "wrangler deploy --minify src/index.ts"
   },
   "dependencies": {
+    "@hono/valibot-validator": "^0.2.2",
+    "@paulmillr/qr": "^0.1.1",
     "discord-api-types": "^0.37.73",
     "discord-interactions": "^3.4.0",
-    "hono": "^4.0.10"
+    "hono": "^4.0.10",
+    "valibot": "^0.30.0"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20240208.0",
+    "@types/qr-image": "^3.2.9",
     "wrangler": "^3.32.0"
   }
 }
