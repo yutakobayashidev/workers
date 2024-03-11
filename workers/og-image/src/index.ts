@@ -46,7 +46,10 @@ export default {
 			const imageResponse = await fetch(ogImageUrl);
 			const contentType = imageResponse.headers.get('Content-Type') || 'application/octet-stream';
 			return new Response(imageResponse.body, {
-				headers: { 'Content-Type': contentType },
+				headers: {
+					'Content-Type': contentType,
+					'Cache-Control': 'max-age=604800',
+				},
 			});
 		} catch (error) {
 			return new Response('Error fetching OGP image', { status: 500 });
