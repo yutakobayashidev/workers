@@ -1,9 +1,14 @@
-import { Hono } from 'hono'
+import { Hono } from "hono";
+import { showRoutes } from "hono/dev";
+import discordRoutes from "@/routes/discord";
+import { HonoConfig } from "@/config";
 
-const app = new Hono()
+const app = new Hono<HonoConfig>();
 
-app.get('/', (c) => {
-  return c.text('Hello Hono!')
-})
+app.use("*");
 
-export default app
+app.route("/discord", discordRoutes);
+
+showRoutes(app);
+
+export default app;
