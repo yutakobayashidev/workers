@@ -1,5 +1,3 @@
-const HIROYUKI_COEFONT_ID = "19d55439-312d-4a1d-a27b-28f0f31bedc5";
-
 export async function createHiroyukiVoice(text: string) {
   const res = await fetch(
     "https://plbwpbyme3.execute-api.ap-northeast-1.amazonaws.com/production/coefonts/19d55439-312d-4a1d-a27b-28f0f31bedc5/try",
@@ -7,7 +5,6 @@ export async function createHiroyukiVoice(text: string) {
       method: "POST",
       headers: { "Content-type": "application/json" },
       body: JSON.stringify({
-        coefont: HIROYUKI_COEFONT_ID,
         text: text,
       }),
     }
