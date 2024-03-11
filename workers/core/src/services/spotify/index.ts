@@ -27,8 +27,6 @@ export const getSpotifyAccessToken = async (
 
   const json: any = await response.json();
 
-  console.log(json.access_token);
-
   return json.access_token;
 };
 

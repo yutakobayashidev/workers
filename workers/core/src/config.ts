@@ -8,6 +8,8 @@ export interface HonoConfig {
     SPOTIFY_CLIENT_ID: string;
     SPOTIFY_CLIENT_SECRET: string;
     SPOTIFY_REFRESH_TOKEN: string;
+    NOTION_TOKEN: string;
+    NOTION_DATABASE_ID: string;
   };
   Variables: {};
 }

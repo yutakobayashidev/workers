@@ -3,4 +3,4 @@ compatibility_date = "2023-12-01"
 
 [triggers]
 # UTC
-crons = ["0 3 * * *"]
+crons = ["0 3 * * *","0 * * * *"]
