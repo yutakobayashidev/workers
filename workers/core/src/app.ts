@@ -1,6 +1,7 @@
 import { Hono } from "hono";
 import { showRoutes } from "hono/dev";
 import discordRoutes from "@/routes/discord";
+import spotifyRoutes from "@/routes/spotify";
 import { HonoConfig } from "@/config";
 import { vValidator } from "@hono/valibot-validator";
 import { createQRCode } from "./libs/qr";
@@ -18,6 +19,8 @@ app.get("/", async (c) => {
 });
 
 app.route("/discord", discordRoutes);
+
+app.route("/spotify", spotifyRoutes);
 
 app.get(
   "/hiroyuki",
