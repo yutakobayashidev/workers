@@ -7,7 +7,7 @@ const scheduled: ExportedHandler<HonoConfig["Bindings"]>["scheduled"] = async (
 ) => {
   switch (event.cron) {
     case "0 3 * * *":
-      await fetchDoodleData(env.DISCORD_WEBHOOK_URL);
+      await fetchDoodleData(env.DEEPL_API_KEY, env.DISCORD_WEBHOOK_URL);
   }
 };
 

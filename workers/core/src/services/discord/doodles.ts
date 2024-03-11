@@ -14,7 +14,7 @@ const getRandomColor = () => {
   return colors[Math.floor(Math.random() * colors.length)];
 };
 
-async function getDoodleDescription(url: string) {
+async function getDoodleDescription(authKey: string, url: string) {
   try {
     const response = await fetch(url);
     const html = await response.text();
@@ -27,11 +27,16 @@ async function getDoodleDescription(url: string) {
 
     if (firstParagraph) {
       return translate(
+        authKey,
         toMarkdown(toMdast({ type: "root", children: [firstParagraph] })),
         "JA"
       );
     } else if (metaDescription) {
-      return translate(metaDescription.properties.content as string, "JA");
+      return translate(
+        authKey,
+        metaDescription.properties.content as string,
+        "JA"
+      );
     }
   } catch (error) {
     console.error("Error fetching Doodle description:", error);
@@ -39,7 +44,7 @@ async function getDoodleDescription(url: string) {
   return null;
 }
 
-async function fetchDoodleData(discordWebHookURL: string) {
+async function fetchDoodleData(authKey: string, discordWebHookURL: string) {
   const today = format(new Date(), "yyyy-MM-dd");
   const language = "ja";
   const ENDPOINT = `https://www.google.com/doodles/json/${today.substring(
@@ -54,7 +59,7 @@ async function fetchDoodleData(discordWebHookURL: string) {
     for (const doodle of doodles) {
       const doodleDate = formatDate(doodle.run_date_array);
       if (today === doodleDate) {
-        await postDoodleToDiscord(doodle, discordWebHookURL);
+        await postDoodleToDiscord(authKey, doodle, discordWebHookURL);
         break;
       }
     }
@@ -63,9 +68,13 @@ async function fetchDoodleData(discordWebHookURL: string) {
   }
 }
 
-async function postDoodleToDiscord(doodle: any, discordWebHookURL: string) {
+async function postDoodleToDiscord(
+  doodle: any,
+  discordWebHookURL: string,
+  authKey: string
+) {
   const color = getRandomColor();
-  const description = await getDoodleDescription(doodle.url);
+  const description = await getDoodleDescription(authKey, doodle.url);
   const wavBlob = await createHiroyukiVoice(description);
 
   const message = {

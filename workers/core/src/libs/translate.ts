@@ -1,10 +1,14 @@
 import deepl, { DeeplLanguages } from "deepl";
 
-export const translate = async (text: string, target: DeeplLanguages) => {
+export const translate = async (
+  authKey: string,
+  text: string,
+  target: DeeplLanguages
+) => {
   const res = await deepl({
     text,
     target_lang: target,
-    auth_key: process.env.DEEPL_API_KEY as string,
+    auth_key: authKey,
     free_api: true,
   })
     .then((result) => result.data.translations[0].text)
