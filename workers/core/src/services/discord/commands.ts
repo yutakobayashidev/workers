@@ -18,6 +18,11 @@ export const NOTION_COMMAND: RESTPostAPIApplicationCommandsJSONBody = {
   ],
 };
 
+export const EMAIL_COMMAND: RESTPostAPIApplicationCommandsJSONBody = {
+  name: "email",
+  description: "特定のメールアドレスにメールを送信します",
+};
+
 export const REGISTER_COMMAND: RESTPostAPIApplicationCommandsJSONBody = {
   name: "register",
   description: "Discordボットのコマンドを再登録します",
@@ -26,6 +31,7 @@ export const REGISTER_COMMAND: RESTPostAPIApplicationCommandsJSONBody = {
 const commands: RESTPostAPIApplicationCommandsJSONBody[] = [
   INVITE_COMMAND,
   NOTION_COMMAND,
+  REGISTER_COMMAND,
 ];
 
 export default commands;

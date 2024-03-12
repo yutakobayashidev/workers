@@ -1,4 +1,11 @@
-import { Song, SpotifyTrackSchema } from "@/types/spotify";
+import {
+  SpotifyTrackSchema,
+  Track,
+  SpotifyShowSchema,
+  Show,
+  SpotifyArtistSchema,
+  Artist,
+} from "@/types/spotify";
 
 const TOKEN_ENDPOINT = `https://accounts.spotify.com/api/token`;
 const TOP_TRACKS_ENDPOINT = `https://api.spotify.com/v1/me/top/tracks?limit=10`;
@@ -30,14 +37,6 @@ export const getSpotifyAccessToken = async (
   return json.access_token;
 };
 
-export const getNowPlaying = async (accessToken: string) => {
-  return fetch(NOW_PLAYING_ENDPOINT, {
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-    },
-  });
-};
-
 export const getTopTracks = async (accessToken: string) => {
   const tracksResponse = await fetch(TOP_TRACKS_ENDPOINT, {
     headers: {
@@ -48,7 +47,7 @@ export const getTopTracks = async (accessToken: string) => {
   const { items } = (await tracksResponse.json()) as {
     items: SpotifyTrackSchema[];
   };
-  const tracks: Song[] = items.map((track) => ({
+  const tracks: Track[] = items.map((track) => ({
     artists: track.artists.map((_artist) => ({
       name: _artist.name,
       externalUrl: _artist.external_urls.spotify,
@@ -64,15 +63,26 @@ export const getTopTracks = async (accessToken: string) => {
 };
 
 export const getTopArtists = async (accessToken: string) => {
-  const res = await fetch(TOP_ARTIST_ENDPOINT, {
+  const response = await fetch(TOP_ARTIST_ENDPOINT, {
     headers: {
       Authorization: `Bearer ${accessToken}`,
     },
   });
 
-  const json: any = await res.json();
+  const { items } = (await response.json()) as {
+    items: SpotifyArtistSchema[];
+  };
 
-  return json.items;
+  const artists: Artist[] = items.map((artist) => ({
+    name: artist.name,
+    image: artist.images[0].url,
+    url: artist.external_urls.spotify,
+    genres: artist.genres,
+    followers: artist.followers.total,
+    popularity: artist.popularity,
+  }));
+
+  return artists;
 };
 
 export const getShows = async (accessToken: string) => {
@@ -82,7 +92,26 @@ export const getShows = async (accessToken: string) => {
     },
   });
 
-  const shows = await response.json();
+  const { items } = (await response.json()) as {
+    items: SpotifyShowSchema[];
+  };
+
+  const shows: Show[] = items.map((show) => ({
+    name: show.show.name,
+    publisher: show.show.publisher,
+    description: show.show.description,
+    image: show.show.images[0].url,
+    id: show.show.id,
+    url: show.show.external_urls.spotify,
+  }));
 
   return shows;
+};
+
+export const getNowPlaying = async (accessToken: string) => {
+  return fetch(NOW_PLAYING_ENDPOINT, {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
 };
