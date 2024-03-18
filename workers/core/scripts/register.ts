@@ -1,4 +1,4 @@
-import commands from "../services/discord/commands";
+import commands from "../src/services/discord/commands";
 import dotenv from "dotenv";
 import process from "node:process";
 
