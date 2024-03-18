@@ -1,23 +1,30 @@
 {
   "scripts": {
     "dev": "wrangler dev src/index.ts",
-    "deploy": "wrangler deploy --minify src/index.ts"
+    "deploy": "wrangler deploy --minify src/index.ts",
+    "deploy:command": "tsx scripts/register.ts"
   },
+  "type": "module",
   "dependencies": {
     "@hono/valibot-validator": "^0.2.2",
     "@hono/zod-openapi": "^0.9.8",
     "@notionhq/client": "^2.2.14",
     "@paulmillr/qr": "^0.1.1",
-    "cheerio": "1.0.0-rc.12",
     "date-fns": "^3.3.1",
     "deepl": "^1.0.13",
     "discord-api-types": "^0.37.73",
     "discord-interactions": "^3.4.0",
+    "discord.js": "^14.14.1",
+    "dotenv": "^16.4.5",
+    "form-data": "^4.0.0",
     "hast-util-from-html": "^2.0.1",
     "hast-util-select": "^6.0.2",
     "hast-util-to-mdast": "^10.1.0",
     "hono": "^4.0.10",
+    "langchain": "^0.1.28",
     "mdast-util-to-markdown": "^2.1.0",
+    "postal-mime": "^2.1.2",
+    "tsx": "^4.7.1",
     "valibot": "^0.30.0"
   },
   "devDependencies": {
