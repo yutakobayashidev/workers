@@ -15,8 +15,6 @@ const scheduled: ExportedHandler<HonoConfig["Bindings"]>["scheduled"] = async (
         env.DISCORD_TOKEN,
         env.DISCORD_APPLICATION_ID
       );
-      break;
-    case "0 * * * *":
       await changeCover(env.NOTION_TOKEN, env.NOTION_DATABASE_ID);
       break;
     case "0 8 * * *":
