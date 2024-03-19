@@ -18,20 +18,44 @@ export const NOTION_COMMAND: RESTPostAPIApplicationCommandsJSONBody = {
   ],
 };
 
-export const EMAIL_COMMAND: RESTPostAPIApplicationCommandsJSONBody = {
-  name: "email",
-  description: "特定のメールアドレスにメールを送信します",
-};
-
 export const REGISTER_COMMAND: RESTPostAPIApplicationCommandsJSONBody = {
   name: "register",
   description: "Discordボットのコマンドを再登録します",
+};
+
+
+export const DLSITE_COMMAND: RESTPostAPIApplicationCommandsJSONBody = {
+  name: "dlsite",
+  description: "DLsiteの作品をRJコードから検索します",
+  options: [
+    {
+      name: "コード",
+      required: true,
+      type: 3,
+      description: "RJコード",
+    },
+  ],
+};
+
+export const BLUESKY_COMMAND: RESTPostAPIApplicationCommandsJSONBody = {
+  name: "bluesky",
+  description: "Blueskyに投稿します",
+  options: [
+    {
+      name: "text",
+      required: true,
+      type: 3,
+      description: "テキスト",
+    },
+  ],
 };
 
 const commands: RESTPostAPIApplicationCommandsJSONBody[] = [
   INVITE_COMMAND,
   NOTION_COMMAND,
   REGISTER_COMMAND,
+  DLSITE_COMMAND,
+  BLUESKY_COMMAND,
 ];
 
 export default commands;

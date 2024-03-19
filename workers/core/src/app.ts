@@ -4,15 +4,16 @@ import discordRoutes from "@/routes/discord";
 import spotifyRoutes from "@/routes/spotify";
 import { HonoConfig } from "@/config";
 import { vValidator } from "@hono/valibot-validator";
-import { createQRCode } from "./libs/qr";
-import { QRschema } from "./schema";
+import { createQRCode } from "@/libs/qr";
+import { QRschema } from "@/schema";
 import { createHiroyukiVoice } from "./libs/hiroyuki";
 import { object, string } from "valibot";
 import { cache } from "hono/cache";
+import { inject } from "@/middleware/inject";
 
 const app = new Hono<HonoConfig>();
 
-app.use("*");
+app.use("*", inject);
 
 app.get("/", async (c) => {
   return c.redirect("https://yutakobayashi.dev");
