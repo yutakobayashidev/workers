@@ -1,11 +1,12 @@
 import { Client } from "@notionhq/client";
 import { DiscordClient } from "./clients/discord";
+import { BlueskyClient } from "./clients/bluesky";
 
 export type InternalContext = {
   notion: Client;
   discord: DiscordClient;
+  bluesky: BlueskyClient
 };
-
 
 export interface HonoConfig {
   Bindings: {
@@ -13,6 +14,8 @@ export interface HonoConfig {
     OPENAI_API_KEY: string;
     DISCORD_APPLICATION_ID: string;
     FORWARD_EMAIL: string;
+    BLUESKY_IDENTIFIER: string;
+    BLUESKY_PASSWORD: string;
     CHANNEL_ID: string;
     DISCORD_PUBLIC_KEY: string;
     NOTION_INBOX_DATABASE_ID: string;
@@ -28,6 +31,7 @@ export interface HonoConfig {
   Variables: {
     notion: Client;
     discord: DiscordClient
+    bluesky: BlueskyClient
     internal: InternalContext;
   };
 }

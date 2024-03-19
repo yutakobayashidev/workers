@@ -12,7 +12,6 @@
     "@notionhq/client": "^2.2.14",
     "@paulmillr/qr": "^0.1.1",
     "date-fns": "^3.3.1",
-    "deepl": "^1.0.13",
     "discord-api-types": "^0.37.73",
     "discord-interactions": "^3.4.0",
     "discord.js": "^14.14.1",

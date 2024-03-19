@@ -1,21 +1,10 @@
-import deepl, { DeeplLanguages } from "deepl";
+export async function translate(authKey: string, text: string, targetLanguage: string): Promise<string> {
+  const apiUrl = `https://api-free.deepl.com/v2/translate?auth_key=${authKey}&text=${encodeURIComponent(text)}&target_lang=${targetLanguage}`;
 
-export const translate = async (
-  authKey: string,
-  text: string,
-  target: DeeplLanguages
-) => {
-  const res = await deepl({
-    text,
-    target_lang: target,
-    auth_key: authKey,
-    free_api: true,
-  })
-    .then((result) => result.data.translations[0].text)
-    .catch((error) => {
-      console.error(error);
-      return error;
-    });
+  const response = await fetch(apiUrl, {
+    method: 'POST',
+  });
 
-  return res;
-};
+  const data: any = await response.json();
+  return data.translations[0].text;
+}

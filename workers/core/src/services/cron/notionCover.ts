@@ -15,8 +15,6 @@ export const changeCover = async (
   const index = Math.floor(Math.random() * res.results.length);
   const randomPage = res.results[index];
 
-  console.log("Selected page:", randomPage);
-
   // @ts-ignore
   const coverUrl = randomPage.cover?.external?.url;
   if (coverUrl) {
