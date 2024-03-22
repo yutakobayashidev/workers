@@ -22,7 +22,7 @@ const scheduled: ExportedHandler<HonoConfig["Bindings"]>["scheduled"] = async (
     case "0 0 * * *":
       await todayInbox(env);
       break;
-    case "59 14 * * 0":
+    case "59 14 * * 7":
       ctx.waitUntil(
         sendWakaTimeStats(env),
       );
