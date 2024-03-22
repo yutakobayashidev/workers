@@ -33,7 +33,7 @@ app.post("/interaction", verifyDiscordInteraction, async (c) => {
       errorResponse(
         e instanceof Error
           ? e.message
-          : "なにか問題が起こったみたいだ！[GitHub](https://github.com/yutakobayashidev/sandbox/tree/main/node/apps/kotobade-asobou-discord)で貢献しよう！"
+          : "Something seems to have gone wrong!"
       )
     );
   }
