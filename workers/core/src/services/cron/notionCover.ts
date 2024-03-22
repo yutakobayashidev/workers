@@ -1,15 +1,13 @@
+import { HonoConfig } from "@/config";
 import { Client } from "@notionhq/client";
 
-export const changeCover = async (
-  NOTION_TOKEN: string,
-  NOTION_DATABASE_ID: string
-) => {
+export const changeCover = async (env: HonoConfig["Bindings"]) => {
   const notion = new Client({
-    auth: NOTION_TOKEN,
+    auth: env.NOTION_TOKEN,
   });
 
   const res = await notion.databases.query({
-    database_id: NOTION_DATABASE_ID,
+    database_id: env.NOTION_DATABASE_ID,
   });
 
   const index = Math.floor(Math.random() * res.results.length);
@@ -19,7 +17,7 @@ export const changeCover = async (
   const coverUrl = randomPage.cover?.external?.url;
   if (coverUrl) {
     await notion.databases.update({
-      database_id: NOTION_DATABASE_ID,
+      database_id: env.NOTION_DATABASE_ID,
       cover: {
         type: "external",
         external: {

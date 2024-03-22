@@ -2,10 +2,12 @@ import { fetchDoodleData } from "@/services/cron/doodles";
 import { changeCover } from "@/services/cron/notionCover";
 import { HonoConfig } from "@/config";
 import { todayInbox } from "@/services/cron/todayInbox";
+import { sendWakaTimeStats } from "./services/cron/wakatime";
 
 const scheduled: ExportedHandler<HonoConfig["Bindings"]>["scheduled"] = async (
   event,
-  env
+  env,
+  ctx
 ) => {
   switch (event.cron) {
     case "0 * * * *":
@@ -15,15 +17,14 @@ const scheduled: ExportedHandler<HonoConfig["Bindings"]>["scheduled"] = async (
         env.DISCORD_TOKEN,
         env.DISCORD_APPLICATION_ID
       );
-      await changeCover(env.NOTION_TOKEN, env.NOTION_DATABASE_ID);
+      await changeCover(env);
       break;
-    case "0 8 * * *":
-      await todayInbox(
-        env.DISCORD_TOKEN,
-        env.DISCORD_APPLICATION_ID,
-        env.CHANNEL_ID,
-        env.NOTION_TOKEN,
-        env.NOTION_INBOX_DATABASE_ID
+    case "0 0 * * *":
+      await todayInbox(env);
+      break;
+    case "59 14 * * 0":
+      ctx.waitUntil(
+        sendWakaTimeStats(env),
       );
       break;
   }

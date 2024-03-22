@@ -1,24 +1,19 @@
 import { DiscordClient } from "@/clients/discord";
+import { HonoConfig } from "@/config";
 import { Client } from "@notionhq/client";
 import { APIEmbedField } from "discord-api-types/v10";
 
-export const todayInbox = async (
-    DISCORD_TOKEN: string,
-    DISCORD_APPLICATION_ID: string,
-    CHANNEL_ID: string,
-    NOTION_TOKEN: string,
-    NOTION_INBOX_DATABASE_ID: string
-) => {
+export const todayInbox = async (env: HonoConfig["Bindings"]) => {
     const notion = new Client({
-        auth: NOTION_TOKEN,
+        auth: env.NOTION_TOKEN,
     });
 
-    const client = new DiscordClient(DISCORD_TOKEN, DISCORD_APPLICATION_ID);
+    const client = new DiscordClient(env.DISCORD_TOKEN, env.DISCORD_APPLICATION_ID);
 
     const today = new Date().toISOString().substring(0, 10);
 
     const response = await notion.databases.query({
-        database_id: NOTION_INBOX_DATABASE_ID,
+        database_id: env.NOTION_INBOX_DATABASE_ID,
         filter: {
             and: [
                 {
@@ -59,7 +54,7 @@ export const todayInbox = async (
     });
 
     await client.sendMessage({
-        channelId: CHANNEL_ID,
+        channelId: env.CHANNEL_ID,
         body: {
             embeds: [
                 {

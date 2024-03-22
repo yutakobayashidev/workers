@@ -26,6 +26,7 @@ export interface HonoConfig {
     SPOTIFY_REFRESH_TOKEN: string;
     NOTION_TOKEN: string;
     NOTION_DATABASE_ID: string;
+    WAKATIME_API_KEY: string
     YUTA_STUDIO: KVNamespace;
   };
   Variables: {

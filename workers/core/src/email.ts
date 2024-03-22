@@ -116,7 +116,7 @@ const notifyMessage = async function (message: ForwardableEmailMessage, env: Hon
         const client = new DiscordClient(env.DISCORD_TOKEN, env.DISCORD_APPLICATION_ID);
 
         await client.sendMessage({
-            channelId: "1028287639918497822",
+            channelId: env.CHANNEL_ID,
             body: notifyMessage
         });
 
