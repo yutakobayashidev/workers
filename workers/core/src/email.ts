@@ -63,7 +63,7 @@ async function summarizeEmail(text: string | undefined, env: HonoConfig["Binding
     const prompt = new PromptTemplate({
         inputVariables: ['text'],
         template: `
-    Briefly summarize the contents of the following e-mail in Japanese::
+    Briefly summarize in Japanese the actions I should take based on the content of the following email received. Ignore the marketing email is an action:
 
     "{text}"
 
