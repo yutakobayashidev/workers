@@ -50,12 +50,26 @@ export const BLUESKY_COMMAND: RESTPostAPIApplicationCommandsJSONBody = {
   ],
 };
 
+export const ETH_COMMAND: RESTPostAPIApplicationCommandsJSONBody = {
+  name: "eth",
+  description: "Ethereum Mainnetの残高を確認します",
+  options: [
+    {
+      name: "address",
+      required: true,
+      type: 3,
+      description: "アドレス",
+    },
+  ],
+};
+
 const commands: RESTPostAPIApplicationCommandsJSONBody[] = [
   INVITE_COMMAND,
   NOTION_COMMAND,
   REGISTER_COMMAND,
   DLSITE_COMMAND,
   BLUESKY_COMMAND,
+  ETH_COMMAND,
 ];
 
 export default commands;

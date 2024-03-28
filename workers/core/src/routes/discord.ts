@@ -8,6 +8,7 @@ import dlsiteCommand from "@/interactions/applicationCommands/dlsite";
 import registerCommand from "@/interactions/applicationCommands/register";
 import inviteCommand from "@/interactions/applicationCommands/invite";
 import blueskyCommand from "@/interactions/applicationCommands/bluesky";
+import ethCommand from "@/interactions/applicationCommands/eth";
 
 const app = new Hono<HonoConfig>();
 
@@ -22,7 +23,7 @@ app.post("/interaction", verifyDiscordInteraction, async (c) => {
             intentObj: body,
             ctx: c.get("internal"),
             commands: [
-              dlsiteCommand, registerCommand, inviteCommand, blueskyCommand
+              dlsiteCommand, registerCommand, inviteCommand, blueskyCommand, ethCommand
             ],
           }),
         );
