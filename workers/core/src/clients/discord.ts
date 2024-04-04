@@ -1,5 +1,5 @@
 import {
-    RESTPostAPIChannelMessageJSONBody, RESTPostAPIApplicationCommandsJSONBody, RESTPostAPIChannelInviteResult
+    RESTPostAPIChannelMessageJSONBody, RESTGetAPIChannelMessagesResult, RESTPostAPIApplicationCommandsJSONBody, RESTPostAPIChannelInviteResult
 } from "discord-api-types/v10";
 import FormData from "form-data";
 
@@ -115,6 +115,23 @@ export class DiscordClient {
                 `Failed to register commands: ${res.status} ${res.statusText}`,
             );
         }
+    }
+
+    async getChannelMessages(channelId: string, after?: string) {
+        const url = new URL(`${this.BASE_URL}/channels/${channelId}/messages`);
+        if (after) {
+            url.searchParams.append('after', after);
+        }
+
+        const res = await fetch(url.toString(), {
+            headers: this.config.headers,
+        });
+
+        if (!res.ok) {
+            throw new Error(`Failed to get messages: ${res.status} ${res.statusText}`);
+        }
+
+        return await res.json() as RESTGetAPIChannelMessagesResult;
     }
 
 }

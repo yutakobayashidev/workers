@@ -11,6 +11,7 @@ export type InternalContext = {
 export interface HonoConfig {
   Bindings: {
     DISCORD_TOKEN: string;
+    SLACK_TOKEN: string;
     OPENAI_API_KEY: string;
     DISCORD_APPLICATION_ID: string;
     FORWARD_EMAIL: string;
