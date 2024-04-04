@@ -23,7 +23,7 @@ const scheduled: ExportedHandler<HonoConfig["Bindings"]>["scheduled"] = async (
     case "0 0 * * *":
       await todayInbox(env);
       break;
-    case "* * * * *":
+    case "*/5 * * * *":
       ctx.waitUntil(
         checkMessagesAndPostToSlack(env),
       );
