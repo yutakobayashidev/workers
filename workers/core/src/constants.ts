@@ -9,3 +9,5 @@ export const REGISTER_COMMAND_NAME = "register";
 export const INVITE_COMMAND_NAME = "invite";
 
 export const ETH_COMMAND_NAME = "eth";
+
+export const OPTOUT_COMMAND_NAME = "optout";

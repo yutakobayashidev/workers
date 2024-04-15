@@ -6,6 +6,11 @@ export async function checkMessagesAndPostToSlack({ YUTA_STUDIO, DISCORD_TOKEN, 
     const messages = await client.getChannelMessages("1028287639918497822", lastMessageId);
 
     for (const message of messages.reverse()) {
+        const userOptOut = await YUTA_STUDIO.get(`optout:${message.author.id}`);
+        if (userOptOut && JSON.parse(userOptOut).optout) {
+            continue;  // オプトアウトしているユーザーのメッセージはスキップ
+        }
+
         const formattedMessage = `*${message.author.username}:* ${message.content}`;
         await postToSlack(formattedMessage, SLACK_TOKEN, message.attachments);
     }
@@ -16,7 +21,6 @@ export async function checkMessagesAndPostToSlack({ YUTA_STUDIO, DISCORD_TOKEN, 
 }
 
 async function postToSlack(message: string, token: string, attachments: any[] = []) {
-
     const blocks: { type: string; text?: { type: string; text: string; }; image_url?: string; alt_text?: string }[] = [{
         type: "section",
         text: { type: "mrkdwn", text: message }

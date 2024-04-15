@@ -63,6 +63,11 @@ export const ETH_COMMAND: RESTPostAPIApplicationCommandsJSONBody = {
   ],
 };
 
+export const OPTOUT_COMMAND: RESTPostAPIApplicationCommandsJSONBody = {
+  name: "optout",
+  description: "N/S高等学校への#times_yuta-studioへのメッセージ配信をオプトアウトします",
+};
+
 const commands: RESTPostAPIApplicationCommandsJSONBody[] = [
   INVITE_COMMAND,
   NOTION_COMMAND,
@@ -70,6 +75,7 @@ const commands: RESTPostAPIApplicationCommandsJSONBody[] = [
   DLSITE_COMMAND,
   BLUESKY_COMMAND,
   ETH_COMMAND,
+  OPTOUT_COMMAND,
 ];
 
 export default commands;

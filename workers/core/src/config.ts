@@ -6,6 +6,7 @@ export type InternalContext = {
   notion: Client;
   discord: DiscordClient;
   bluesky: BlueskyClient
+  kv: KVNamespace;
 };
 
 export interface HonoConfig {
