@@ -11,7 +11,14 @@ export async function checkMessagesAndPostToSlack({ YUTA_STUDIO, DISCORD_TOKEN, 
             continue;  // オプトアウトしているユーザーのメッセージはスキップ
         }
 
-        const formattedMessage = `*${message.author.username}:* ${message.content}`;
+        let formattedMessage = `*${message.author.username}:* ${message.content}`;
+
+        // 返信の場合、元のメッセージを引用として追加
+        if (message.referenced_message) {
+            const originalMessage = `>${message.referenced_message.author.username}: ${message.referenced_message.content}\n`;
+            formattedMessage = originalMessage + formattedMessage;
+        }
+
         await postToSlack(formattedMessage, SLACK_TOKEN, message.attachments);
     }
 
