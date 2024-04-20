@@ -58,4 +58,54 @@ app.get("/commands", async (c) => {
   return c.json(await response.json());
 });
 
+app.get("/icons", async (c) => {
+
+  const token = c.env.DISCORD_TOKEN;
+  const guildId = "895564066922328094";
+
+  const response = await fetch("https://discord.com/api/v10/guilds/895564066922328094", {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bot ${token}`,
+    },
+    method: "GET",
+  });
+
+  const responseData = await response.json();
+  const iconHash = (responseData as { icon: string }).icon;
+  const iconUrl = iconHash ? `https://cdn.discordapp.com/icons/${guildId}/${iconHash}.png` : null;
+
+  if (!iconUrl) {
+    return c.json({ message: "No icon found" });
+  }
+
+  const response2 = await fetch(iconUrl, {
+    headers: {
+      "Content-Type": "image/png",
+    },
+    method: "GET",
+  });
+
+  return new Response(await response2.arrayBuffer(), {
+    headers: {
+      "Content-Type": "image/png",
+    },
+  });
+}
+);
+
+app.get("/", async (c) => {
+  const token = c.env.DISCORD_TOKEN;
+
+  const response = await fetch("https://discord.com/api/v10/guilds/895564066922328094", {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bot ${token}`,
+    },
+    method: "GET",
+  });
+
+  return c.json(await response.json());
+})
+
 export default app;
