@@ -18,7 +18,6 @@ export const inject = createMiddleware<HonoConfig>(async (c, next) => {
 
     if (!c.get("bluesky")) {
         const client = new BlueskyClient(c.env.BLUESKY_IDENTIFIER, c.env.BLUESKY_PASSWORD);
-        await client.login();
         c.set("bluesky", client);
     }
 

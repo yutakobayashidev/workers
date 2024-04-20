@@ -16,6 +16,8 @@ const handler = async ({
 
     const text = (intentObj.data as any).options[0].value;
 
+    await ctx.bluesky.login();
+
     const res = await ctx.bluesky.post({
         body: text,
     });
