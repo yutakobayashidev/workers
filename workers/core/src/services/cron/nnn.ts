@@ -43,7 +43,7 @@ async function postToSlack(message: string, token: string, attachments: any[] = 
 
     const response = await fetch("https://slack.com/api/chat.postMessage", {
         method: "POST",
-        body: JSON.stringify({ channel: "C04H7HRV5E0", blocks }),
+        body: JSON.stringify({ channel: "C06TE4N1HS4", blocks }),
         headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`
