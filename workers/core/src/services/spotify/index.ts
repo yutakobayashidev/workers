@@ -16,47 +16,25 @@ const SHOWS_ENDPOINT = "https://api.spotify.com/v1/me/shows?limit=12";
 export const getSpotifyAccessToken = async (
   SPOTIFY_CLIENT_ID: string,
   SPOTIFY_CLIENT_SECRET: string,
-  REFRESH_TOKEN: string,
-  kv: KVNamespace
+  REFRESH_TOKEN: string
 ) => {
-  const cachedToken = await kv.get("spotify:access_token");
-  const tokenExpiryStr = await kv.get("spotify:token_expiry");
-
-  let expiry;
-  if (tokenExpiryStr) {
-    expiry = new Date(tokenExpiryStr);
-  }
-
-  const now = new Date();
-  const timeDifference = expiry ? expiry.getTime() - now.getTime() : null;
-
-  if (cachedToken && timeDifference && timeDifference >= 59 * 60 * 1000) {
-    return cachedToken;
-  }
-
   const basic = btoa(`${SPOTIFY_CLIENT_ID}:${SPOTIFY_CLIENT_SECRET}`);
+
   const response = await fetch(TOKEN_ENDPOINT, {
-    method: 'POST',
+    method: "POST",
     headers: {
       Authorization: `Basic ${basic}`,
-      'Content-Type': 'application/x-www-form-urlencoded',
+      "Content-Type": "application/x-www-form-urlencoded",
     },
     body: new URLSearchParams({
-      grant_type: 'refresh_token',
+      grant_type: "refresh_token",
       refresh_token: REFRESH_TOKEN,
     }),
   });
 
   const json: any = await response.json();
 
-  const accessToken = json.access_token;
-  const expiresIn = json.expires_in;
-  const expiryDate = new Date(now.getTime() + expiresIn * 1000);
-
-  await kv.put("spotify:access_token", accessToken);
-  await kv.put("spotify:token_expiry", expiryDate.toISOString());
-
-  return accessToken;
+  return json.access_token;
 };
 
 export const getTopTracks = async (accessToken: string) => {

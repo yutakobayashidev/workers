@@ -15,7 +15,6 @@ app.get("/top-tracks", async (c) => {
     c.env.SPOTIFY_CLIENT_ID,
     c.env.SPOTIFY_CLIENT_SECRET,
     c.env.SPOTIFY_REFRESH_TOKEN,
-    c.env.YUTA_STUDIO
   );
 
   const tracks = await getTopTracks(refreshToken);
@@ -28,7 +27,6 @@ app.get("/top-artists", async (c) => {
     c.env.SPOTIFY_CLIENT_ID,
     c.env.SPOTIFY_CLIENT_SECRET,
     c.env.SPOTIFY_REFRESH_TOKEN,
-    c.env.YUTA_STUDIO
   );
 
   const artists = await getTopArtists(refreshToken);
@@ -38,13 +36,10 @@ app.get("/top-artists", async (c) => {
 
 app.get("/shows", async (c) => {
 
-  console.log(c.env.SPOTIFY_CLIENT_ID);
-
   const refreshToken = await getSpotifyAccessToken(
     c.env.SPOTIFY_CLIENT_ID,
     c.env.SPOTIFY_CLIENT_SECRET,
     c.env.SPOTIFY_REFRESH_TOKEN,
-    c.env.YUTA_STUDIO
   );
 
   const shows = await getShows(refreshToken);
@@ -57,7 +52,6 @@ app.get("/now-playing", async (c) => {
     c.env.SPOTIFY_CLIENT_ID,
     c.env.SPOTIFY_CLIENT_SECRET,
     c.env.SPOTIFY_REFRESH_TOKEN,
-    c.env.YUTA_STUDIO
   );
 
   const response = await getNowPlaying(refreshToken);
