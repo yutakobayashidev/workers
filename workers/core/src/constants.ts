@@ -11,3 +11,5 @@ export const INVITE_COMMAND_NAME = "invite";
 export const ETH_COMMAND_NAME = "eth";
 
 export const OPTOUT_COMMAND_NAME = "optout";
+
+export const KEYOXIDE_COMMAND_NAME = "keyoxide";

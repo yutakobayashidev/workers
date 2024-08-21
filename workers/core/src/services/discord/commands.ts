@@ -63,6 +63,19 @@ export const ETH_COMMAND: RESTPostAPIApplicationCommandsJSONBody = {
   ],
 };
 
+export const KEYOXIDE_COMMAND: RESTPostAPIApplicationCommandsJSONBody = {
+  name: "keyoxide",
+  description: "Keyoxideのプロフィールを検索します",
+  options: [
+    {
+      name: "query",
+      required: true,
+      type: 3,
+      description: "email,fingerprint",
+    },
+  ],
+};
+
 export const OPTOUT_COMMAND: RESTPostAPIApplicationCommandsJSONBody = {
   name: "optout",
   description: "N/S高等学校への#times_yuta-studioへのメッセージ配信をオプトアウトします",
@@ -76,6 +89,7 @@ const commands: RESTPostAPIApplicationCommandsJSONBody[] = [
   BLUESKY_COMMAND,
   ETH_COMMAND,
   OPTOUT_COMMAND,
+  KEYOXIDE_COMMAND,
 ];
 
 export default commands;
