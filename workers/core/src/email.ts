@@ -13,7 +13,6 @@ const email: ExportedHandler<HonoConfig["Bindings"]>["email"] = async (
 
 const buildNotifyMessage = async (message: ForwardableEmailMessage, parsedEmail: Email) => {
 
-
     return {
         embeds: [
             {
@@ -77,10 +76,22 @@ const notifyMessage = async function (message: ForwardableEmailMessage, env: Hon
 
         const client = new DiscordClient(env.DISCORD_TOKEN, env.DISCORD_APPLICATION_ID);
 
-        await client.sendMessage({
-            channelId: env.CHANNEL_ID,
-            body: notifyMessage
-        });
+        try {
+            await client.sendMessage({
+                channelId: env.CHANNEL_ID,
+                body: notifyMessage
+            });
+
+        } catch (e) {
+            await client.sendMessage({
+                channelId: env.CHANNEL_ID,
+                body: {
+                    content: "Failed to send email notification to Discord"
+                }
+            });
+        }
+
+
 
 
     } catch (e) {
