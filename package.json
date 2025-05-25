@@ -1,6 +1,17 @@
 {
-  "name": "workers",
-  "devDependencies": {
-    "wrangler": "^3.1.2"
-  }
+	"name": "workers",
+	"packageManager": "pnpm@9.7.1",
+	"scripts": {
+		"setup": "corepack enable pnpm",
+		"preinstall": "npx only-allow pnpm",
+		"lint": "biome lint --write .",
+		"lint:repo": "sherif -f",
+		"lint:claude": "claude -p 'あなたはリンターです。mainブランチとの変更を確認し、タイポに関する問題を報告してください。ファイル名と行番号を1行目に、問題の説明を2行目に報告してください。他のテキストは返さないでください。'",
+		"fmt": "biome format --write ."
+	},
+	"devDependencies": {
+		"@biomejs/biome": "1.9.4",
+		"sherif": "^1.5.0",
+		"wrangler": "^3.1.2"
+	}
 }

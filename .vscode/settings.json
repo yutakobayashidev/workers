@@ -1,7 +1,4 @@
 {
-  "recommendations": [
-    "biomejs.biome"
-  ],
   "workbench.editor.enablePreview": false,
   "workbench.editor.enablePreviewFromQuickOpen": false,
   "editor.bracketPairColorization.enabled": true,
@@ -37,8 +34,7 @@
     "**/.classpath": true,
     "**/.project": true,
     "**/.settings": true,
-    "**/.factorypath": true,
-    //    "**/node_modules": true
+    "**/.factorypath": true
   },
   "files.watcherExclude": {
     "**/__generated__/**": true,

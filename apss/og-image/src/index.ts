@@ -32,13 +32,12 @@ class OGPParser {
 
 export default {
 	async fetch(request: Request): Promise<Response> {
-
 		const url = new URL(request.url);
 
-		const targetUrl = url.searchParams.get('url');
+		const targetUrl = url.searchParams.get("url");
 
 		if (!targetUrl) {
-			return new Response('URL parameter is missing', { status: 400 });
+			return new Response("URL parameter is missing", { status: 400 });
 		}
 
 		const decodedHref = decodeURIComponent(targetUrl);
@@ -49,16 +48,17 @@ export default {
 		await rewriter.transform(siteRes).text();
 
 		if (!ogp.ogpImageUrl) {
-			return new Response('OGP image not found', { status: 404 });
+			return new Response("OGP image not found", { status: 404 });
 		}
 
 		const imageResponse = await fetch(ogp.ogpImageUrl);
-		const contentType = imageResponse.headers.get('Content-Type') || 'application/octet-stream';
+		const contentType =
+			imageResponse.headers.get("Content-Type") || "application/octet-stream";
 		return new Response(imageResponse.body, {
 			headers: {
-				'Content-Type': contentType,
-				'Cache-Control': 'max-age=604800',
+				"Content-Type": contentType,
+				"Cache-Control": "max-age=604800",
 			},
 		});
 	},
-}
+};

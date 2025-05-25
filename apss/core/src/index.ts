@@ -3,7 +3,7 @@ import scheduled from "./scheduled";
 import email from "./email";
 
 export default {
-  fetch: app.fetch,
-  scheduled,
-  email
+	fetch: app.fetch,
+	scheduled,
+	email,
 };
