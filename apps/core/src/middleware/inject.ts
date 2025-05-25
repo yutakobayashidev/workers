@@ -5,10 +5,6 @@ import { DiscordClient } from "@/clients/discord";
 import { BlueskyClient } from "@/clients/bluesky";
 
 export const inject = createMiddleware<HonoConfig>(async (c, next) => {
-	if (!c.get("notion")) {
-		const client = new Client({ auth: c.env.NOTION_TOKEN });
-		c.set("notion", client);
-	}
 
 	if (!c.get("discord")) {
 		const client = new DiscordClient(

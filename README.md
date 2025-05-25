@@ -19,7 +19,7 @@ Built with:
 - Hono (Web framework)
 - TypeScript
 
-For detailed setup and development instructions, see [core/README.md](./apss/core/README.md).
+For detailed setup and development instructions, see [core/README.md](./apps/core/README.md).
 
 ## reverse-proxy
 
