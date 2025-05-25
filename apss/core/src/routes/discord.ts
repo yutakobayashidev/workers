@@ -64,10 +64,10 @@ app.get("/commands", async (c) => {
 
 app.get("/icons", async (c) => {
 	const token = c.env.DISCORD_TOKEN;
-	const guildId = "895564066922328094";
+	const guildId = c.env.DISCORD_GUILD_ID;
 
 	const response = await fetch(
-		"https://discord.com/api/v10/guilds/895564066922328094",
+		`https://discord.com/api/v10/guilds/${guildId}`,
 		{
 			headers: {
 				"Content-Type": "application/json",
@@ -103,9 +103,10 @@ app.get("/icons", async (c) => {
 
 app.get("/", async (c) => {
 	const token = c.env.DISCORD_TOKEN;
+	const guildId = c.env.DISCORD_GUILD_ID;
 
 	const response = await fetch(
-		"https://discord.com/api/v10/guilds/895564066922328094",
+		`https://discord.com/api/v10/guilds/${guildId}`,
 		{
 			headers: {
 				"Content-Type": "application/json",

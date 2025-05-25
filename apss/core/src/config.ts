@@ -7,6 +7,9 @@ export type InternalContext = {
 	discord: DiscordClient;
 	bluesky: BlueskyClient;
 	kv: KVNamespace;
+	env: {
+		DISCORD_DEVELOPER_USER_ID: string;
+	};
 };
 
 export interface HonoConfig {
@@ -29,6 +32,11 @@ export interface HonoConfig {
 		NOTION_TOKEN: string;
 		NOTION_DATABASE_ID: string;
 		WAKATIME_API_KEY: string;
+		DISCORD_DOODLE_CHANNEL_ID: string;
+		DISCORD_NNN_CHANNEL_ID: string;
+		DISCORD_GUILD_ID: string;
+		DISCORD_DEVELOPER_USER_ID: string;
+		SLACK_NNN_CHANNEL_ID: string;
 		YUTA_STUDIO: KVNamespace;
 	};
 	Variables: {

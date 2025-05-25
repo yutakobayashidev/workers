@@ -47,6 +47,7 @@ async function fetchDoodleData(
 	authKey: string,
 	DISCORD_TOKEN: string,
 	DISCORD_APPLICATION_ID: string,
+	DISCORD_DOODLE_CHANNEL_ID: string,
 ) {
 	const current = new Date();
 	const year = current.getFullYear();
@@ -64,6 +65,7 @@ async function fetchDoodleData(
 				doodle,
 				DISCORD_TOKEN,
 				DISCORD_APPLICATION_ID,
+				DISCORD_DOODLE_CHANNEL_ID,
 				YUTA_STUDIO,
 			});
 		}
@@ -77,12 +79,14 @@ async function postDoodleToDiscord({
 	doodle,
 	DISCORD_TOKEN,
 	DISCORD_APPLICATION_ID,
+	DISCORD_DOODLE_CHANNEL_ID,
 	YUTA_STUDIO,
 }: {
 	authKey: string;
 	doodle: any;
 	DISCORD_TOKEN: string;
 	DISCORD_APPLICATION_ID: string;
+	DISCORD_DOODLE_CHANNEL_ID: string;
 	YUTA_STUDIO: KVNamespace;
 }) {
 	const doodlePostedKey = `doodle:${doodle.name}`;
@@ -109,7 +113,7 @@ async function postDoodleToDiscord({
 	);
 
 	await client.sendMessage({
-		channelId: "1043762190303363112",
+		channelId: DISCORD_DOODLE_CHANNEL_ID,
 		body: {
 			embeds: [
 				{

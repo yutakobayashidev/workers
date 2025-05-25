@@ -16,7 +16,7 @@ const handler = async ({
 	intentObj: ApplicationCommandObj;
 	ctx: InternalContext;
 }): Promise<APIInteractionResponseChannelMessageWithSource> => {
-	verifyReadability(intentObj.member?.user?.id);
+	verifyReadability(intentObj.member?.user?.id, ctx.env.DISCORD_DEVELOPER_USER_ID);
 
 	await ctx.discord.registerCommands({ commands });
 
