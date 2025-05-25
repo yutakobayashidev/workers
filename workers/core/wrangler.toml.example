@@ -2,6 +2,9 @@ name = "core"
 compatibility_date = "2023-12-01"
 main = "src/index.ts"
 
+kv_namespaces = [
+]
+
 [triggers]
 # UTC
-crons = ["0 * * * *","0 0 * * *","59 14 * * 7","*/5 * * * * "]
+crons = ["0 * * * *", "0 0 * * *", "59 14 * * 7", "*/5 * * * *"]
