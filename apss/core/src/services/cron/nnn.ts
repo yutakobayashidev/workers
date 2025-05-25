@@ -5,16 +5,20 @@ export async function checkMessagesAndPostToSlack({
 	DISCORD_TOKEN,
 	DISCORD_APPLICATION_ID,
 	SLACK_TOKEN,
+	DISCORD_NNN_CHANNEL_ID,
+	SLACK_NNN_CHANNEL_ID,
 }: {
 	YUTA_STUDIO: KVNamespace;
 	DISCORD_TOKEN: string;
 	DISCORD_APPLICATION_ID: string;
 	SLACK_TOKEN: string;
+	DISCORD_NNN_CHANNEL_ID: string;
+	SLACK_NNN_CHANNEL_ID: string;
 }) {
 	const lastMessageId = (await YUTA_STUDIO.get("lastMessageId")) as string;
 	const client = new DiscordClient(DISCORD_TOKEN, DISCORD_APPLICATION_ID);
 	const messages = await client.getChannelMessages(
-		"1028287639918497822",
+		DISCORD_NNN_CHANNEL_ID,
 		lastMessageId,
 	);
 
@@ -32,7 +36,7 @@ export async function checkMessagesAndPostToSlack({
 			formattedMessage = originalMessage + formattedMessage;
 		}
 
-		await postToSlack(formattedMessage, SLACK_TOKEN, message.attachments);
+		await postToSlack(formattedMessage, SLACK_TOKEN, SLACK_NNN_CHANNEL_ID, message.attachments);
 	}
 
 	if (messages.length > 0) {
@@ -43,6 +47,7 @@ export async function checkMessagesAndPostToSlack({
 async function postToSlack(
 	message: string,
 	token: string,
+	channelId: string,
 	attachments: any[] = [],
 ) {
 	const blocks: {
@@ -67,7 +72,7 @@ async function postToSlack(
 
 	const response = await fetch("https://slack.com/api/chat.postMessage", {
 		method: "POST",
-		body: JSON.stringify({ channel: "C06TE4N1HS4", blocks }),
+		body: JSON.stringify({ channel: channelId, blocks }),
 		headers: {
 			"Content-Type": "application/json",
 			Authorization: `Bearer ${token}`,

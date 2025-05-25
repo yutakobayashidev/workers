@@ -33,6 +33,9 @@ export const inject = createMiddleware<HonoConfig>(async (c, next) => {
 			discord: c.get("discord"),
 			bluesky: c.get("bluesky"),
 			kv: c.env.YUTA_STUDIO,
+			env: {
+				DISCORD_DEVELOPER_USER_ID: c.env.DISCORD_DEVELOPER_USER_ID,
+			},
 		};
 		c.set("internal", internal);
 	}

@@ -1,4 +1,4 @@
-export function verifyReadability(userId: string | undefined) {
-	if (userId !== "890908900520505354")
+export function verifyReadability(userId: string | undefined, allowedUserId: string) {
+	if (userId !== allowedUserId)
 		throw new Error("このコマンドは開発者のみが使用できます。");
 }
