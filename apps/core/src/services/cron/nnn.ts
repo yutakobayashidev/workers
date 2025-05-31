@@ -47,25 +47,20 @@ async function postToSlack(
 	token: string,
 	channelId: string,
 ) {
-	// Get Discord user avatar URL
+	// Get Discord user avatar URL (smaller size for inline display)
 	const avatarUrl = message.author.avatar 
-		? `https://cdn.discordapp.com/avatars/${message.author.id}/${message.author.avatar}.png?size=64`
+		? `https://cdn.discordapp.com/avatars/${message.author.id}/${message.author.avatar}.png?size=32`
 		: `https://cdn.discordapp.com/embed/avatars/${Number(message.author.discriminator) % 5}.png`;
 
 	// Create rich message blocks with embedded card layout
 	const blocks: any[] = [];
 
-	// Header section with user info and avatar
+	// Header section with user info and inline avatar
 	blocks.push({
 		type: "section",
 		text: {
 			type: "mrkdwn",
-			text: `*${message.author.username}*${message.author.discriminator !== "0" ? `#${message.author.discriminator}` : ""}`
-		},
-		accessory: {
-			type: "image",
-			image_url: avatarUrl,
-			alt_text: `${message.author.username} avatar`
+			text: `<${avatarUrl}|> *${message.author.username}*${message.author.discriminator !== "0" ? `#${message.author.discriminator}` : ""}`
 		}
 	});
 
