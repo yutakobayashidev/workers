@@ -48,12 +48,12 @@ async function postToSlack(
 	channelId: string,
 ) {
 	// Get Discord user avatar URL
-	const avatarUrl = message.author.avatar 
+	const avatarUrl = message.author.avatar
 		? `https://cdn.discordapp.com/avatars/${message.author.id}/${message.author.avatar}.png`
 		: `https://cdn.discordapp.com/embed/avatars/${Number(message.author.discriminator) % 5}.png`;
 
 	// Get guild icon URL if available
-	const guildIconUrl = guild.icon 
+	const guildIconUrl = guild.icon
 		? `https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}.png`
 		: null;
 
@@ -76,15 +76,15 @@ async function postToSlack(
 		author_name: message.author.display_name || message.author.username,
 		author_icon: avatarUrl,
 		text: messageText,
-		footer: `${guild.name}@Discord Channel from: ${message.channel?.name || "Unknown"}`,
+		footer: guild.name,
 		...(guildIconUrl && { footer_icon: guildIconUrl }),
 		ts: Math.floor(new Date(message.timestamp).getTime() / 1000)
 	};
 
 	const response = await fetch("https://slack.com/api/chat.postMessage", {
 		method: "POST",
-		body: JSON.stringify({ 
-			channel: channelId, 
+		body: JSON.stringify({
+			channel: channelId,
 			attachments: [attachment],
 			unfurl_links: false,
 			unfurl_media: false
