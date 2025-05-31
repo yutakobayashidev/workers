@@ -16,6 +16,7 @@ const scheduled: ExportedHandler<HonoConfig["Bindings"]>["scheduled"] = async (
 				SLACK_TOKEN: env.SLACK_TOKEN,
 				DISCORD_NNN_CHANNEL_ID: env.DISCORD_NNN_CHANNEL_ID,
 				SLACK_NNN_CHANNEL_ID: env.SLACK_NNN_CHANNEL_ID,
+				DISCORD_GUILD_ID: env.DISCORD_GUILD_ID,
 			}));
 			break;
 		case "59 14 * * 7":

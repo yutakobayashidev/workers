@@ -137,4 +137,18 @@ export class DiscordClient {
 
 		return (await res.json()) as RESTGetAPIChannelMessagesResult;
 	}
+
+	async getGuild(guildId: string) {
+		const res = await fetch(`${this.BASE_URL}/guilds/${guildId}`, {
+			headers: this.config.headers,
+		});
+
+		if (!res.ok) {
+			throw new Error(
+				`Failed to get guild: ${res.status} ${res.statusText}`,
+			);
+		}
+
+		return (await res.json()) as { id: string; name: string; icon: string | null };
+	}
 }
