@@ -3,6 +3,7 @@ import type {
 	RESTGetAPIChannelMessagesResult,
 	RESTPostAPIApplicationCommandsJSONBody,
 	RESTPostAPIChannelInviteResult,
+	RESTGetAPIGuildResult,
 } from "discord-api-types/v10";
 import FormData from "form-data";
 
@@ -136,5 +137,19 @@ export class DiscordClient {
 		}
 
 		return (await res.json()) as RESTGetAPIChannelMessagesResult;
+	}
+
+	async getGuild(guildId: string) {
+		const res = await fetch(`${this.BASE_URL}/guilds/${guildId}`, {
+			headers: this.config.headers,
+		});
+
+		if (!res.ok) {
+			throw new Error(
+				`Failed to get guild: ${res.status} ${res.statusText}`,
+			);
+		}
+
+		return (await res.json()) as RESTGetAPIGuildResult;
 	}
 }
