@@ -47,78 +47,45 @@ async function postToSlack(
 	token: string,
 	channelId: string,
 ) {
-	// Get Discord user avatar URL (smaller size for inline display)
+	// Get Discord user avatar URL
 	const avatarUrl = message.author.avatar 
-		? `https://cdn.discordapp.com/avatars/${message.author.id}/${message.author.avatar}.png?size=32`
+		? `https://cdn.discordapp.com/avatars/${message.author.id}/${message.author.avatar}.png`
 		: `https://cdn.discordapp.com/embed/avatars/${Number(message.author.discriminator) % 5}.png`;
 
-	// Create rich message blocks with embedded card layout
-	const blocks: any[] = [];
+	// Get guild icon URL if available
+	const guildIconUrl = guild.icon 
+		? `https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}.png`
+		: null;
 
-	// Header section with user info and inline avatar
-	blocks.push({
-		type: "section",
-		text: {
-			type: "mrkdwn",
-			text: `<${avatarUrl}|> *${message.author.username}*${message.author.discriminator !== "0" ? `#${message.author.discriminator}` : ""}`
-		}
-	});
-
-	// Reply context if this is a reply
+	// Build message text including reply context
+	let messageText = message.content || "";
 	if (message.referenced_message) {
-		blocks.push({
-			type: "context",
-			elements: [
-				{
-					type: "mrkdwn",
-					text: `↪️ Replying to *${message.referenced_message.author.username}*: ${message.referenced_message.content.length > 100 ? message.referenced_message.content.substring(0, 100) + "..." : message.referenced_message.content}`
-				}
-			]
-		});
+		messageText = `↪️ Replying to *${message.referenced_message.author.username}*: ${message.referenced_message.content.length > 100 ? message.referenced_message.content.substring(0, 100) + "..." : message.referenced_message.content}\n\n${messageText}`;
 	}
 
-	// Main message content
-	if (message.content) {
-		blocks.push({
-			type: "section",
-			text: {
-				type: "mrkdwn",
-				text: message.content
-			}
-		});
-	}
-
-	// Handle image attachments
+	// Handle image attachments by adding them to the text
 	for (const attachment of message.attachments || []) {
 		if (attachment.content_type?.startsWith("image/")) {
-			blocks.push({
-				type: "image",
-				image_url: attachment.url,
-				alt_text: attachment.filename || "Discord Image",
-				title: {
-					type: "plain_text",
-					text: attachment.filename || "Image"
-				}
-			});
+			messageText += `\n📎 ${attachment.filename || "Image"}: ${attachment.url}`;
 		}
 	}
 
-	// Footer with server context and timestamp
-	blocks.push({
-		type: "context",
-		elements: [
-			{
-				type: "mrkdwn",
-				text: `📡 ${guild.name} • <!date^${Math.floor(new Date(message.timestamp).getTime() / 1000)}^{date_pretty} at {time}|${message.timestamp}>`
-			}
-		]
-	});
+	// Create the legacy attachment format
+	const attachment = {
+		mrkdwn_in: ["text"],
+		author_name: message.author.display_name || message.author.username,
+		author_icon: avatarUrl,
+		text: messageText,
+		footer: `${guild.name}@Discord Channel from: ${message.channel?.name || "Unknown"}`,
+		...(guildIconUrl && { footer_icon: guildIconUrl }),
+		ts: Math.floor(new Date(message.timestamp).getTime() / 1000)
+	};
 
 	const response = await fetch("https://slack.com/api/chat.postMessage", {
 		method: "POST",
 		body: JSON.stringify({ 
 			channel: channelId, 
-			blocks,
+			attachments: [attachment],
 			unfurl_links: false,
 			unfurl_media: false
 		}),
